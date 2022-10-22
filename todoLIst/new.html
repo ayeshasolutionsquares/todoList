@@ -1,0 +1,26 @@
+<input type='text' id=2 name='tag' max="12"></input>
+    <button type = 'submit'>submit</button>
+    <script>
+//////////////////////////////////////////////////
+//objects
+       let myJSON='{"name":"ayesha","age":21}'
+let myObj=JSON.parse(myJSON)   
+let x= myObj.age
+let text=""
+console.log(myObj)
+console.log(x)
+for(let y in myObj){
+    text=text+y+":"+myObj[y]+","
+}
+console.log(text)
+////////////////////////////////////////////////////
+//arrays
+let arr='["ayesha",21,"saiyed"]'
+let myArray=JSON.parse(arr)
+let test=''
+for(let z in myArray){
+test+=myArray[z]+' '
+}
+console.log(test)
+console.log(myArray)
+console.log(myArray[0])

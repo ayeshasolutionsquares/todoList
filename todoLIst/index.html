@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+     <title>Todo</title>
+</head>
+<style>
+    /* @media only screen and (min-width: 500px)
+     {.container
+    { width: 50% }
+} */
+#addtask-btn{
+    width:80px;
+}
+
+.btn-success{
+width:70px;
+}
+.btn-danger{
+width:70px;
+}
+.heading{
+    text-align:center;
+}
+#taskitems{
+    width:500px;
+}
+/* .container-sm{
+    background-color:rgb(230, 140, 155)
+}.box{
+    background-color:rgb(139, 187, 121)
+}
+.wrapper{
+    background-color:rgb(149, 155, 204)
+} */
+</style>
+<body>
+  
+<div class="container-sm object-center p-4">
+    <div class="box p-2" > 
+       <h1 class="heading">To-Do List</h1>
+        <div class="d-flex mt-4" >
+            <input id="text" class="form-control p-1" type="text" name="task" value="">
+            <button type="button" class="p-1 m-2 btn btn-primary" id="addtask-btn">add</button>
+        </div>
+    </div>
+
+     <div class=" wrapper d-flex flex-row" >
+         <p id="taskitems" class="p-3">this is some text</p>
+         <div class="p-1 d-flex flex-row-reverse" >
+         <span><button id="edittask-btn" type="button" class="p-1 m-2 btn btn-success">edit</button></span> 
+         <span><button id="deletetask-btn" type="button" class="p-1 m-2 btn btn-danger">delete</button></span> 
+        </div>
+    </div>
+</div>
+      
+
+ <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous">
+
+let addTask=document.getElementById("addtask-btn")
+addTask.addEventListener("click",addTaskItem)
+let editTask=document.getElementById("edittask-btn")
+editTask.addEventListener("click",editTaskItem)
+let deleteTask=document.getElementById("deletetask-btn")
+editTask.addEventListener("click",deleteTaskItem)
+
+function addTaskItem(){
+    let item=document.getElementById("text").value
+    document.getElementById("taskitems").innerHTML=item
+}
+
+function editTaskItem(){
+
+}
+
+function deleteTaskItem(){
+    
+}
+</script>
+</body>
+
+</html>
