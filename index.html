@@ -1,25 +1,18 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
-     <title>Todo</title>
+<title>Todo</title>
+<link rel="icon" type="image/x-icon" href="favicon.ico">
 </head>
+
 <style>
-    /* @media only screen and (min-width: 500px)
-     {.container
-    { width: 50% }
-} */
 #addtask-btn{
     width:80px;
-}
-#edit-btn{
-width:80px;
-}
-.btn-success{
-width:70px;
 }
 .btn-danger{
 width:70px;
@@ -27,90 +20,86 @@ width:70px;
 .heading{
     text-align:center;
 }
-#taskitems{
-    width:500px;
-}
-/* .container-sm{
+
+/*.
+.container-sm{
     background-color:rgb(230, 140, 155)
 }.box{
     background-color:rgb(139, 187, 121)
 }
 .wrapper{
     background-color:rgb(149, 155, 204)
-} */
+}
+.styling{
+    background-color:aqua
+}  */
 </style>
+
 <body>
-  
-<div class="container-sm object-center p-4">
-    <div class="box p-2" > 
-       <h1 class="heading">To-Do List</h1>
-        <div class="d-flex mt-4" >
+  <div class="container-sm object-center p-4">
+        <h1 class="heading">To-Do List</h1>
+        <div class="d-flex mt-4">
             <input id="text" class="form-control p-1" type="text" value="">
-            <button type="button" class="add p-1 m-2 btn btn-primary" id="addtask-btn">add</button>
-            <button type="button" class="edit p-1 m-2 btn btn-primary" id="edit-btn" style="display:none">edit</button>
+            <button type="button" class="p-1 m-2 btn btn-primary" id="addtask-btn">add</button>
         </div>
-    </div>
-
-     <div class="wrapper d-flex flex-row">
-         <p id="taskitems" class="p-3"></p>
-         <div class="index p-1 d-flex flex-row">
-           <button id="edittask-btn" type="button" class="p-1 m-2 btn btn-success">edit</button> 
-           <button id="deletetask-btn" type="button" class="p-1 m-2 btn btn-danger">delete</button>
-        </div>
-    </div>
-
- <script>
-  let todoArray=[]
+    
+        <ul id="myList" style="list-style:none">
+        </ul>
+ </div>
  
+ <script>
 let addTask=document.getElementById("addtask-btn")
 addTask.addEventListener("click",addTaskItem)
 
-let editTask=document.getElementById("edittask-btn")
-editTask.addEventListener("click",editTaskItem)
-
-let deleteTask=document.getElementById("deletetask-btn")
-deleteTask.addEventListener("click",deleteTaskItem)
-
-let editedTask=document.getElementById("edit-btn")
-editedTask.addEventListener("click",editedTaskItem)
+let arr=[]
 
 function addTaskItem(){
+    let val=document.getElementById("text").value
+    arr.push(val)
 
-    let item=document.getElementById("text").value
-    document.getElementById('taskitems').innerText=item
-    localStorage.setItem('task',JSON.stringify(item))
-    document.getElementById("text").value=''
-    todoArray.push(item)
-    console.log(todoArray)
+    let ul = document.getElementById('myList')
+    let div = document.createElement("div")
+    var li = document.createElement('li')
+    var del = document.createElement('button')
+ 
+    var classesToAdd = ["p-1","m-2","btn","btn-danger"]
+    del.classList.add(...classesToAdd);
+
+    var classessToAdd = ["p-1","m-2","styling","flex-row"]
+    li.classList.add(...classessToAdd);
+   
+    del.addEventListener("click",deleteTaskItem)
+    li.innerText = val
+    ul.append(li)
+    li.append(div)
+    div.append(del)
+    del.innerText = "delete"
+    
+    document.getElementById("text").value = ''
+    
+    console.log("array : "+arr)
+
+    localStorage.setItem('tasks',JSON.stringify(arr))
+
+    function deleteTaskItem(){
+    var value = li.innerText
+    this.remove();
+    for(i=0;i<arr.length;i++){
+    if(arr[i]==li.innerText)
+    {
+        arr.splice(i,1)
+        li.remove()
+    }
+    }
+
+    localStorage.setItem('tasks',JSON.stringify(arr))
+    let arr1=JSON.parse(localStorage.getItem('tasks'))
+    console.log("arr in localStorage : "+arr1) 
+    }
 }
-
-function editedTaskItem(){
-
-    let editedItem=document.getElementById("text").value
-      document.getElementById('taskitems').innerText=editedItem
-    localStorage.setItem('task',JSON.stringify(editedItem))
-      document.getElementById("edit-btn").style.display = "none";
-      document.getElementById("addtask-btn").style.display = "block";
-      document.getElementById("text").value=''
-
-}
-
-function editTaskItem(){
- let val=JSON.parse(localStorage.getItem('task'))
-    document.getElementById("text").value=val
-    document.getElementById("addtask-btn").style.display = "none";
-    document.getElementById("edit-btn").style.display = "block";
-}
-
-function deleteTaskItem(){
-    todoArray.pop()
-    alert("deleted!")
-localStorage.removeItem('task')
-document.getElementById('taskitems').innerText=""
-document.getElementById('text').value=""
-}
-
+// localStorage.clear()
 </script>
+
 </body>
 
 </html>
